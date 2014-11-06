@@ -19,6 +19,7 @@ class GalleryPlugin(PorticusPluginBase):
     """
     model = GalleryPluginModel
     name = _('Gallery')
+    fields = ('gallery', 'template_name')
     render_template = settings.PORTICUS_GALLERY_PLUGIN_TEMPLATE_DEFAULT
 
     def render(self, context, instance, placeholder):

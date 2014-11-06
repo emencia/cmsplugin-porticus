@@ -10,21 +10,19 @@ from cms.models import CMSPlugin
 from porticus.models import Gallery, Album
 
 class GalleryPlugin(CMSPlugin):
-    """CMS Plugin for displaying a Gallery"""
+    """Plugin config to display a Gallery"""
+    gallery = models.ForeignKey(Gallery, verbose_name=_('gallery'), help_text=_('Gallery to display'))
 
-    gallery = models.ForeignKey(Album, verbose_name=_('album'), help_text=_('Gallery to display'))
-
-    template_name = models.CharField(_('template'), max_length=100, help_text=_('Template used to render the plugin Album'), choices=settings.PORTICUS_GALLERY_PLUGIN_TEMPLATE_CHOICES, default=settings.PORTICUS_GALLERY_PLUGIN_TEMPLATE_DEFAULT, blank=False)
+    template_name = models.CharField(_('template'), max_length=100, help_text=_("Template used to render the Gallery's plugin"), choices=settings.PORTICUS_GALLERY_PLUGIN_TEMPLATE_CHOICES, default=settings.PORTICUS_GALLERY_PLUGIN_TEMPLATE_DEFAULT, blank=False)
 
     def __unicode__(self):
         return self.gallery.name
 
 class AlbumPlugin(CMSPlugin):
-    """CMS Plugin for displaying a Album"""
-
+    """Plugin config to embed an Album"""
     album = models.ForeignKey(Album, verbose_name=_('album'), help_text=_('Album to display'))
 
-    template_name = models.CharField(_('template'), max_length=100, help_text=_('Template used to render the plugin Album'), choices=settings.PORTICUS_ALBUM_PLUGIN_TEMPLATE_CHOICES, default=settings.PORTICUS_ALBUM_PLUGIN_TEMPLATE_DEFAULT, blank=False)
+    template_name = models.CharField(_('template'), max_length=100, help_text=_("Template used to render the Album's plugin"), choices=settings.PORTICUS_ALBUM_PLUGIN_TEMPLATE_CHOICES, default=settings.PORTICUS_ALBUM_PLUGIN_TEMPLATE_DEFAULT, blank=False)
 
     def __unicode__(self):
         return self.album.name
