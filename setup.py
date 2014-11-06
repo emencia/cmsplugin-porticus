@@ -23,7 +23,7 @@ setup(
     ],
     install_requires=[
         'django-cms',
-        'porticus',
+        'porticus>=0.9',
     ],
     include_package_data=True,
     zip_safe=False

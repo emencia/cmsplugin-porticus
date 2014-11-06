@@ -10,8 +10,8 @@ This is the `DjangoCMS`_ plugins for `Porticus`_ to embed *Album* or *Galleries*
 Requires
 ********
 
-* `DjangoCMS`_ >= 2.x, <=3.x;
-* `Porticus`_ >= 0.7.x;
+* `DjangoCMS`_ >= 3.x;
+* `Porticus`_ >= 0.9.x (for *Porticus < 0.9* and so for *DjangoCMS 2.x* use the plugin version *<0.2* from the branch *djangocms_2*);
 
 Optional
 ---------
@@ -38,4 +38,4 @@ See the plugin ``settings.py`` file to see what setting you can override.
 Note
 ****
 
-If you previously used the shipped plugin from Porticus, just disable it and enable this one in ``settings.INSTALLED_APPS``, you won't need to syncdb and your page plugins won't be lost.
+If you previously used the shipped plugin from Porticus, just disable it and enable this one in ``settings.INSTALLED_APPS``, you won't need to syncdb and your page plugins won't be lost. But to fix an issue on Gallery plugin, you will need to pass the South migration '0001' in fake (with ``--fake`` argument) then normally launch the next migrations.
