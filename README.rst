@@ -13,6 +13,11 @@ Requires
 * `DjangoCMS`_ >= 2.x, <=3.x;
 * `Porticus`_ >= 0.7.x;
 
+Optional
+---------
+
+* `South`_ migration is supported;
+
 Install
 *******
 
