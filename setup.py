@@ -1,13 +1,13 @@
 from setuptools import setup, find_packages
 
 setup(
-    name='cmsplugin_porticus',
+    name='cmsplugin-porticus',
     version=__import__('cmsplugin_porticus').__version__,
     description=__import__('cmsplugin_porticus').__doc__,
     long_description=open('README.rst').read(),
     author='David Thenon',
     author_email='dthenon@emencia.com',
-    url='http://pypi.python.org/pypi/cmsplugin_porticus',
+    url='http://pypi.python.org/pypi/cmsplugin-porticus',
     license='MIT',
     packages=find_packages(),
     classifiers=[
