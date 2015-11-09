@@ -7,11 +7,22 @@ cmsplugin_porticus
 
 This is the `DjangoCMS`_ plugins for `Porticus`_ to embed *Album* or *Galleries* in a cms page.
 
+Links
+*****
+
+* Download his `PyPi package <http://pypi.python.org/pypi/cmsplugin-porticus>`_;
+* Clone it on his `Github repository <https://github.com/emencia/cmsplugin-porticus>`_;
+
 Requires
 ********
 
-* `DjangoCMS`_ >= 3.x;
-* `Porticus`_ >= 0.9.x (for *Porticus < 0.9* and so for *DjangoCMS 2.x* use the plugin version *<0.2* from the branch *djangocms_2*);
+* Django >= 1.7;
+* `DjangoCMS`_ >= 3.1;
+* `Porticus`_ >= 1.0.0 (for *Porticus < 0.9* and so for *DjangoCMS 2.x* use the plugin version *<0.2* from the branch *djangocms_2*);
+
+**Warning:** Since ``0.3.0``, database migration has been switched to Django 1.7 migrations system and `South`_ support has been dropped. The `South`_ migration files are still there but moved to ``south_migrations``, resulting in you need ``south==1.x`` to use them. This is only needed if you need to migrate project datas to the last Porticus version, you don't have to care about this if you just start a new project.
+
+Last release version compatible with Django <= 1.6 + `DjangoCMS`_ 3.0 and `Porticus`_ 0.9 is still available on branch ``django_1-6``.
 
 Optional
 ---------
@@ -33,9 +44,9 @@ Then add its settings : ::
 
     from cmsplugin_porticus.settings import *
 
-See the plugin ``settings.py`` file to see what setting you can override.
+See the plugin ``settings.py`` file to see what settings you can override.
 
-Note
-****
+Usage
+*****
 
-If you previously used the shipped plugin from Porticus, just disable it and enable this one in ``settings.INSTALLED_APPS``, you won't need to syncdb and your page plugins won't be lost. But to fix an issue on Gallery plugin, you will need to pass the South migration '0001' in fake (with ``--fake`` argument) then normally launch the next migrations.
+Once installed you can insert porticus Galleries or Albums in your page through the CMS toolbar. Each Porticus content in your pages can use a template from the defined ones in your settings.
