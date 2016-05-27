@@ -1,14 +1,14 @@
 {% load i18n fb_versions %}
 <div class="row">
-    <div class="gallery-detail-{{ gallery_instance.id }}">
+    <div class="gallery-detail-{{ gallery_instance.id }} small-12 columns">
         <h3>{{ gallery_instance.name }}</h3>
         {% if gallery_instance.description %}
             <p>{{ gallery_instance.description }}</p>
         {% endif %}
 
-        <div class="album-grid-aside equal-heights">{% for album in album_list %}
+        <div class="row">{% for album in album_list %}
         {% spaceless %}
-            <div class="small-6 large-3 columns item equalized-item{% if forloop.last %} end{% endif %}">
+            <div class="small-6 large-3 columns item{% if forloop.last %} end{% endif %}">
             <a href="{% url 'porticus:album-detail' gallery_slug=gallery_instance.slug album_slug=album.slug %}">
                 <div class="large-6 columns thumb">
                     {% if album.image  %}
@@ -23,5 +23,26 @@
             </div>
         {% endspaceless %}
         {% endfor %}</div>
+
+        {% if pagination %}<ul class="pagination">
+            {% url 'porticus:gallery-detail' gallery_slug=gallery_instance.slug as gallery_url %}
+            {% if current_album_page.has_previous %}
+            <li class="arrow previous">
+                <a href="{{ gallery_url }}?page={{ current_album_page.previous_page_number }}{{ GET_string }}"
+                title="{% trans "More recent entries" %}">&laquo;</a>
+            </li>
+            {% endif %}
+
+            {% for item in pagination.page_range %}
+            <li><a href="{{ gallery_url }}?page={{ item }}">{{ item }}</a></li>
+            {% endfor %}
+
+            {% if current_album_page.has_next %}
+            <li class="arrow next">
+                <a href="{{ gallery_url }}?page={{ current_album_page.next_page_number }}{{ GET_string }}"
+                title="{% trans "More old entries" %}">&raquo;</a>
+            </li>
+            {% endif %}
+        </ul>{% endif %}
     </div>
 </div>
