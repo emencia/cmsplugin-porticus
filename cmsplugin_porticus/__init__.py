@@ -1,4 +1,4 @@
 """
 Porticus plugins for DjangoCMS
 """
-__version__ = "0.3"
+__version__ = "0.4"
