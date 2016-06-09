@@ -1,9 +1,17 @@
-{% load i18n fb_versions %}
+{% load i18n fb_versions tagging_tags %}
 <div class="row">
     <div class="album-detail-{{ album_instance.id }} small-12 columns">
         <h3>{{ album_instance.name }}</h3>
         {% if album_instance.description %}
             <p>{{ album_instance.description }}</p>
+        {% endif %}
+
+        {% if cloud_tags %}
+            <p class="cloud-tags text-center">
+                {% for tag in cloud_tags %}
+                    <a class="label radius tag-size-{{ tag.font_size }}" href="{% url 'porticus:album-tag' gallery_slug=gallery_instance.slug album_slug=album_instance.slug tag=tag.name %}">{{ tag.name }}</a>
+                {% endfor %}
+            </p>
         {% endif %}
 
         <div class="row">{% for ressource in ressource_list %}

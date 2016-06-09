@@ -33,7 +33,7 @@ Install
 *******
 
 In your ``INSTALLED_APPS`` setting : ::
-    
+
     INSTALLED_APPS = (
         ...
         'cmsplugin_porticus',
@@ -50,3 +50,5 @@ Usage
 *****
 
 Once installed you can insert porticus Galleries or Albums in your page through the CMS toolbar. Each Porticus content in your pages can use a template from the defined ones in your settings.
+
+For Album cloud tags if enabled, you will need to do some CSS to manage size diff between tags, class name start from tag-size-1 to tag-size-XXX where XXX is equivalent to ``settings.PORTICUS_ALBUM_PLUGIN_CLOUD_STEPS`` value (default is 6). Cloud tag html lives inside ``porticus/cms/album_detail.html``.

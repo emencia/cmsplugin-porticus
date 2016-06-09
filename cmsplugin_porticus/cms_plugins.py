@@ -8,6 +8,9 @@ from django.core.paginator import Paginator
 from cms.plugin_pool import plugin_pool
 from cms.plugin_base import CMSPluginBase
 
+from tagging.models import Tag
+from tagging.utils import calculate_cloud
+
 from porticus.models import Album, Ressource
 
 from cmsplugin_porticus.models import GalleryPlugin as GalleryPluginModel
@@ -34,6 +37,8 @@ class GalleryPlugin(PorticusPluginBase):
         # pagination) if any
         album_list = queryset = Album.published.filter(gallery=instance.gallery)
         pagination = current_page = None
+
+       # Apply optional result limit to queryset
         if instance.limit:
             pagination = Paginator(album_list, instance.limit)
             current_page = pagination.page(1) # Is allways the first page
@@ -55,15 +60,29 @@ class AlbumPlugin(PorticusPluginBase):
     """
     model = AlbumPluginModel
     name = _('Album')
-    fields = ('album', 'limit', 'template_name')
+    fields = ('album', 'limit', 'enable_cloud', 'template_name')
     render_template = settings.PORTICUS_ALBUM_PLUGIN_TEMPLATE_DEFAULT
+
+    def get_cloud_tags_queryset(self, object_list):
+        """
+        From given 'object_list' queryset, return a list of tag element
+        """
+        tags_q = Tag.objects.usage_for_queryset(object_list, min_count=1)
+        return calculate_cloud(tags_q, steps=settings.PORTICUS_ALBUM_PLUGIN_CLOUD_STEPS)
 
     def render(self, context, instance, placeholder):
         self.render_template = instance.template_name
 
+
         # Get the publish Gallery albums with optionnal limit if any
         ressource_list = queryset = Ressource.published.filter(album=instance.album)
-        pagination = current_page = None
+        pagination = current_page = cloud_tags = None
+
+        # Optional cloud tag computing
+        if instance.enable_cloud:
+            cloud_tags = self.get_cloud_tags_queryset(queryset)
+
+        # Apply optional result limit to queryset
         if instance.limit:
             pagination = Paginator(ressource_list, instance.limit)
             current_page = pagination.page(1) # Is allways the first page
@@ -76,6 +95,7 @@ class AlbumPlugin(PorticusPluginBase):
             'ressource_list': ressource_list,
             'pagination': pagination,
             'current_ressources_page': current_page,
+            'cloud_tags': cloud_tags,
         })
         return context
 
