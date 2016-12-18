@@ -17,7 +17,7 @@ Requires
 ********
 
 * Django >= 1.7;
-* `DjangoCMS`_ >= 3.1;
+* `DjangoCMS`_ >= 3.3;
 * `Porticus`_ >= 1.0.0 (for *Porticus < 0.9* and so for *DjangoCMS 2.x* use the plugin version *<0.2* from the branch *djangocms_2*);
 
 **Warning:** Since ``0.3.0``, database migration has been switched to Django 1.7 migrations system and `South`_ support has been dropped. The `South`_ migration files are still there but moved to ``south_migrations``, resulting in you need ``south==1.x`` to use them. This is only needed if you need to migrate project datas to the last Porticus version, you don't have to care about this if you just start a new project.

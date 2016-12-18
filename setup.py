@@ -12,6 +12,7 @@ setup(
     packages=find_packages(),
     classifiers=[
         'Programming Language :: Python',
+        "Programming Language :: Python :: 2.7",
         'License :: OSI Approved :: MIT License',
         'Operating System :: OS Independent',
         'Development Status :: 5 - Production/Stable',
@@ -25,7 +26,7 @@ setup(
     ],
     install_requires=[
         'Django>=1.7',
-        'django-cms>=3.1',
+        'django-cms>=3.3',
         'porticus>=1.0.0',
     ],
     include_package_data=True,
